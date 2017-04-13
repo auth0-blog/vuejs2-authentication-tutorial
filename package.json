@@ -12,6 +12,7 @@
   "dependencies": {
     "auth0-lock": "^10.14.0",
     "axios": "^0.16.1",
+    "jquery": "^3.2.1",
     "jwt-decode": "^2.2.0",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0"

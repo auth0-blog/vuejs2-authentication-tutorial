@@ -12,8 +12,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const authCheck = jwt({
-  secret: 'H12DzqVFp2TXwCjJk3vRi0vUFANJnsehWZpG4eVRMt6ObQ5HwMR9cGes3ZLvVvN6',
-  audience: 'g71CvDaxp93S7NthcQ0onZPZ36bzM2G8'
+  secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: "https://{{YOUR-AUTH0-DOMAIN}}/.well-known/jwks.json"
+    }),
+    // This is the identifier we set when we created the API
+    audience: '{YOUR-API-AUDIENCE-ATTRIBUTE}',
+    issuer: "https://{YOUR-AUTH0-DOMAIN}.auth0.com/",
+    algorithms: ['RS256']
 });
 
 app.get('/api/battles/public', (req, res) => {
