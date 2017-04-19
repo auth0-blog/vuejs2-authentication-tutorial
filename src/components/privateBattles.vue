@@ -50,7 +50,7 @@ export default {
       });
     },
   },
-  beforeMount() {
+  mounted() {
     this.getPrivateStartupBattles();
   },
 };

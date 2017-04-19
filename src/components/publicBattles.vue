@@ -53,7 +53,7 @@ export default {
       });
     },
   },
-  beforeMount() {
+  mounted() {
     this.getPublicStartupBattles();
   },
 };
