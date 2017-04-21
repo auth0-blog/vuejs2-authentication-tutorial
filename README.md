@@ -1,6 +1,6 @@
 ## Vuejs 2 Authentication Tutorial
 
-This is the code that accompanies the **Vuejs 2 Authentication Tutorial** on *Auth0 Blog*
+This is the code that accompanies the **[Vuejs 2 Authentication Tutorial](https://auth0.com/blog/vuejs2-authentication-tutorial/)** on *[Auth0 Blog](https://auth0.com/blog/)*
 
 ![Lock Login Widget](https://cdn2.auth0.com/blog/startupbattle/login.png)
 _Lock Login Widget_
