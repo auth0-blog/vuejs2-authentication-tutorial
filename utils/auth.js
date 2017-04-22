@@ -10,7 +10,7 @@ var router = new Router({
 });
 
 export function login() {
-  window.location.href = `https://{YOUR-AUTH0-DOMAIN}.auth0.com/authorize?scope=full_access&audience={YOUR-API-IDENTIFIER}&response_type=id_token%20token&client_id={YOUR-AUTH0-CLIENT-ID}&redirect_uri={YOUR-CALLBACK-URL}&nonce=`;
+  window.location.href = `https://{YOUR-AUTH0-DOMAIN}.auth0.com/authorize?scope={YOUR-SCOPE}&audience={YOUR-API-IDENTIFIER}&response_type=id_token%20token&client_id={YOUR-AUTH0-CLIENT-ID}&redirect_uri={YOUR-CALLBACK-URL}&nonce=${generateNonce()}`;
 }
 
 export function logout() {
