@@ -1,17 +1,34 @@
 import decode from 'jwt-decode';
 import axios from 'axios';
 import Router from 'vue-router';
+import auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-var router = new Router({
-   mode: 'history',
+const CLIENT_ID = '{AUTH0_CLIENT_ID}';
+const CLIENT_DOMAIN = '{AUTH0_DOMAIN}';
+const REDIRECT = 'YOUR_CALLBACK_URL';
+const SCOPE = '{SCOPE}';
+const AUDIENCE = 'AUDIENCE_ATTRIBUTE';
+
+var auth = new auth0.WebAuth({
+  clientID: CLIENT_ID,
+  domain: CLIENT_DOMAIN
 });
 
 export function login() {
-  window.location.href = `https://unicoder.auth0.com/authorize?scope=full_access&audience=http://startupbattle.com&response_type=id_token%20token&client_id=m6WOyitl2hLmn2Afs7oiZKnJHDoZQnSY&redirect_uri=http://localhost:8080/callback&nonce=${generateNonce()}`;
+  auth.authorize({
+    responseType: 'token id_token',
+    redirectUri: REDIRECT,
+    audience: AUDIENCE,
+    scope: SCOPE
+  });
 }
+
+var router = new Router({
+   mode: 'history',
+});
 
 export function logout() {
   clearIdToken();
@@ -62,38 +79,6 @@ export function setAccessToken() {
 export function setIdToken() {
   let idToken = getParameterByName('id_token');
   localStorage.setItem(ID_TOKEN_KEY, idToken);
-  decodeIdToken(idToken);
-}
-
-// Decode id_token to verify the nonce
-function decodeIdToken(token) {
-  const jwt = decode(token);
-  verifyNonce(jwt.nonce);
-}
-
-// Function to generate a nonce which will be used to mitigate replay attacks
-function generateNonce() {
-  let existing = localStorage.getItem('nonce');
-  if (existing === null) {
-    let nonce = '';
-    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 16; i++) {
-        nonce += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    localStorage.setItem('nonce', nonce);
-    return nonce;
-  }
-  return localStorage.getItem('nonce');
-}
-
-// Verify the nonce once user has authenticated. If the nonce can't be verified we'll log the user out
-function verifyNonce(nonce) {
-  if (nonce !== localStorage.getItem('nonce')) {
-    clearIdToken();
-    clearAccessToken();
-  }
-
-  window.location.href = "/";
 }
 
 export function isLoggedIn() {

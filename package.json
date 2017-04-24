@@ -10,6 +10,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "auth0-js": "^8.6.0",
     "auth0-lock": "^10.14.0",
     "axios": "^0.16.1",
     "jquery": "^3.2.1",
