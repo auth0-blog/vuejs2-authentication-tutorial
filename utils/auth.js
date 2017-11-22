@@ -11,6 +11,7 @@ const REDIRECT = 'YOUR_CALLBACK_URL';
 const SCOPE = '{SCOPE}';
 const AUDIENCE = 'AUDIENCE_ATTRIBUTE';
 
+
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN
