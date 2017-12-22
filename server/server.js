@@ -24,6 +24,7 @@ const authCheck = jwt({
     algorithms: ['RS256']
 });
 
+
 app.get('/api/battles/public', (req, res) => {
   let publicBattles = [
   {
